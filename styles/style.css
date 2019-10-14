@@ -3,9 +3,8 @@ html {
   font-family: 'Open Sans', sans-serif;
 }
 
-
 h1 {
-  font-size: 60px;
+  font-size: 50px;
   text-align: center;
 }
 
@@ -33,9 +32,35 @@ h1 {
   padding: 20px 0;
   color: #00539F;
   text-shadow: 3px 3px 1px black;
+
 }
 
 img {
   display: block;
   margin: 0 auto;
+}
+
+.typewriter h1 {
+  color: #00539F;
+  font-family: monospace;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: 
+    typing 3.5s steps(30, end),
+    blink-caret .5s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange }
 }
