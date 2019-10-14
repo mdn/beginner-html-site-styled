@@ -64,3 +64,7 @@ img {
   from, to { border-color: transparent }
   50% { border-color: orange }
 }
+
+footer {
+  text-align: center;
+}
