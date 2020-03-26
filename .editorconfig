@@ -2,4 +2,4 @@
 charset = utf-8
 indent_style = tab
 indent_size = 5
-trim_trailing_whitespace = false
+trim_trailing_whitespace = true
