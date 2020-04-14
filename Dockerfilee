@@ -1,0 +1,4 @@
+FROM ngnix
+MAINTAINER talukdarboni30@gmail.com
+COPY webapp /usr/share/nginx/html/
+EXPOSE 80
