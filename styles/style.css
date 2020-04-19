@@ -4,6 +4,7 @@ html {
 }
 
 
+
 h1 {
   font-size: 60px;
   text-align: center;
@@ -21,7 +22,7 @@ html {
 }
 
 body {
-  width: 600px;
+  width: 50%;
   margin: 0 auto;
   background-color: #FF9500;
   padding: 0 20px 20px 20px;
@@ -38,4 +39,6 @@ h1 {
 img {
   display: block;
   margin: 0 auto;
+  width:80%;
+  max-width: 300px;
 }
