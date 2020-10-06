@@ -5,7 +5,7 @@ html {
 
 
 h1 {
-  font-size: 60px;
+  font-size: 50px;
   text-align: center;
 }
 
@@ -13,25 +13,25 @@ p, li {
   font-size: 16px;
   line-height: 2;
   letter-spacing: 1px;
+  color: #000000;
 }
 
 
 html {
-  background-color: #00539F;
+  background-color: #ffffff;
 }
 
 body {
-  width: 600px;
+  width: 1220px;
   margin: 0 auto;
-  background-color: #FF9500;
+  background-color: #fffff0;
   padding: 0 20px 20px 20px;
-  border: 5px solid black;
 }
 
 h1 {
   margin: 0;
   padding: 20px 0;
-  color: #00539F;
+  color: #f00fff;
   text-shadow: 3px 3px 1px black;
 }
 
