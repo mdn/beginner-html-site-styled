@@ -28,6 +28,15 @@ body {
   border: 5px solid black;
 }
 
+time{
+  width: 600px;
+  margin: 0 auto;
+  background-color: #FF9500;
+  padding: 0 20px 20px 20px;
+  border: 5px solid black;
+}
+
+
 h1 {
   margin: 0;
   padding: 20px 0;
