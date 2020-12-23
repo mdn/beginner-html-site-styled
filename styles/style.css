@@ -36,6 +36,7 @@ h1 {
 }
 
 img {
-  display: block;
-  margin: 0 auto;
+  display: flex;
+  Justify-content: center;
+  align-item: center;
 }
