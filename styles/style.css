@@ -17,7 +17,7 @@ p, li {
 
 
 html {
-  background-color: #00539F;
+  background-color: #5f009f;
 }
 
 body {
@@ -31,11 +31,12 @@ body {
 h1 {
   margin: 0;
   padding: 20px 0;
-  color: #00539F;
+  color: #5f009f;
   text-shadow: 3px 3px 1px black;
 }
 
 img {
   display: block;
   margin: 0 auto;
+  width: 30%;
 }
