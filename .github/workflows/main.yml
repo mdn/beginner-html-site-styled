@@ -25,3 +25,4 @@ jobs:
         username: if0_34425275
         password: ${{ secrets.password }}
         protocol: ftps
+        server-dir: ./htdocs/
