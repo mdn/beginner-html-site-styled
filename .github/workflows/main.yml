@@ -1,0 +1,27 @@
+on: push
+name: 🚀 Deploy website on push
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v3
+
+#     - name: Use Node.js 16
+#       uses: actions/setup-node@v2
+#       with:
+#         node-version: '16'
+      
+#     - name: 🔨 Build Project
+#       run: |
+#         npm install
+#         npm run build
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ftpupload.net
+        username: if0_34425275
+        password: ${{ secrets.password }}
+        protocol: ftps
