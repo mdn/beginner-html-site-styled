@@ -7,7 +7,11 @@ html {
 h1 {
   font-size: 60px;
   text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+ 
 }
+
+
 
 p, li {
   font-size: 16px;
@@ -32,10 +36,26 @@ h1 {
   margin: 0;
   padding: 20px 0;
   color: #00539F;
-  text-shadow: 3px 3px 1px black;
+  /*text-shadow: 3px 3px 1px black;*/
+  text-shadow: 2px 2px 4px rgba(4, 8, 247, 0.5);
+ 
 }
 
 img {
   display: block;
   margin: 0 auto;
+
+
+    border: 2px solid #FF9500;
+    border-radius: 20em;
+    animation: aura 2s ease-in-out infinite alternate;
 }
+@keyframes aura{
+  0%{
+      box-shadow: 0 0 50px #FF9500;
+  }
+  100%{
+      box-shadow:0 0 5px #ff2600;
+  }
+}
+
