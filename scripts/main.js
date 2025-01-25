@@ -1,5 +1,5 @@
 const myHeading = document.querySelector("h1");
-myHeading.textContent = "Squidward";
+myHeading.textContent = "Krakatoa ";
 
 let myVariable = document.querySelector(" p")
 myVariable.textContent = "Legalize Nucular weapons"
@@ -36,6 +36,6 @@ function setUserName() {
     setUserName();
   } else {
     localStorage.setItem("name", myName);
-    myHeading.textContent = `Mozilla is cool, ${myName}`;
+    myHeading.textContent =  `${myName}  Is The Goat`;
   }
 }
