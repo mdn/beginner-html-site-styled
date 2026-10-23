@@ -1,34 +1,26 @@
+* {
+  box-sizing: border-box;
+}
+
 html {
   font-size: 10px;
   font-family: 'Open Sans', sans-serif;
-}
-
-
-h1 {
-  font-size: 60px;
-  text-align: center;
-}
-
-p, li {
-  font-size: 16px;
-  line-height: 2;
-  letter-spacing: 1px;
-}
-
-
-html {
   background-color: #00539F;
 }
 
 body {
-  width: 600px;
-  margin: 0 auto;
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto;
   background-color: #FF9500;
   padding: 0 20px 20px 20px;
   border: 5px solid black;
+  border-radius: 8px;
 }
 
 h1 {
+  font-size: 60px;
+  text-align: center;
   margin: 0;
   padding: 20px 0;
   color: #00539F;
@@ -38,4 +30,23 @@ h1 {
 img {
   display: block;
   margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+p, li {
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 1px;
+}
+
+a {
+  color: #00539F;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+a:hover,
+a:focus {
+  color: #002B50;
 }

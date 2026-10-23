@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="operaGradient" x1="15%" y1="0%" x2="85%" y2="100%">
+      <stop offset="0%" stop-color="#FF1B2D"/>
+      <stop offset="40%" stop-color="#FF0014"/>
+      <stop offset="100%" stop-color="#A70010"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#operaGradient)" fill-rule="evenodd" d="M128 16C66.14 16 16 66.14 16 128s50.14 112 112 112 112-50.14 112-112S189.86 16 128 16zm0 36c30.93 0 52 32.24 52 76s-21.07 76-52 76-52-32.24-52-76 21.07-76 52-76z"/>
+</svg>
