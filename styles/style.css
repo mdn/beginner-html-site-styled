@@ -11,11 +11,12 @@ html {
 body {
   width: 90%;
   max-width: 600px;
-  margin: 20px auto;
+  margin: 30px auto;
   background-color: #FF9500;
   padding: 0 20px 20px 20px;
   border: 5px solid black;
-  border-radius: 8px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
 h1 {
@@ -24,7 +25,7 @@ h1 {
   margin: 0;
   padding: 20px 0;
   color: #00539F;
-  text-shadow: 3px 3px 1px black;
+  text-shadow: 3px 3px 2px black;
 }
 
 img {
@@ -32,6 +33,11 @@ img {
   margin: 0 auto;
   max-width: 100%;
   height: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+img:hover {
+  transform: scale(1.08);
 }
 
 p, li {
@@ -40,13 +46,26 @@ p, li {
   letter-spacing: 1px;
 }
 
+ul {
+  padding-left: 25px;
+}
+
+li {
+  font-weight: 600;
+}
+
 a {
   color: #00539F;
   font-weight: bold;
-  text-decoration: underline;
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 2px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
 }
 
 a:hover,
 a:focus {
-  color: #002B50;
+  color: #ffffff;
+  background-color: #00539F;
 }
