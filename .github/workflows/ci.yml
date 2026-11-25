@@ -1,0 +1,16 @@
+name: Primer CI
+on:
+ push:
+ branches: ["main"]
+
+ jobs:
+  runs-on: unbuntu-latest
+  steps:
+  -name: Clone repo
+  -uses: actions/checkout@v4
+
+  -name: "Check files."
+  run: | 
+  ls -la
+  echo "The code is here."
+
