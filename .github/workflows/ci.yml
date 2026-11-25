@@ -13,6 +13,5 @@ jobs:
 
       - name: Check files
         run: |
-        ls -la
-        echo "Checking for required files..."
-        
+          ls -la
+          echo "The code is here"
