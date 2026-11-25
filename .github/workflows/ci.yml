@@ -1,16 +1,18 @@
 name: Primer CI
+
 on:
- push:
- branches: ["main"]
+  push:
+    branches: ["main"]
 
- jobs:
-  runs-on: unbuntu-latest
-  steps:
-  -name: Clone repo
-  -uses: actions/checkout@v4
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v4
 
-  -name: "Check files."
-  run: | 
-  ls -la
-  echo "The code is here."
-
+      - name: Check files
+        run: |
+        ls -la
+        echo "Checking for required files..."
+        
