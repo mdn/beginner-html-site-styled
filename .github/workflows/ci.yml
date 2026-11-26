@@ -17,22 +17,42 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Construir imagen Docker
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mi-app-html:${{ github.sha }} .
+      # --- NUEVO: Configuración de Buildx para Caché ---
+      - name: Configurar Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-      - name: Publicar imagen en Docker Hub
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/mi-app-html:${{ github.sha }}
+      # --- NUEVO: Build y Push en un solo paso (con caché) ---
+      - name: Construir y Publicar imagen Docker
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/mi-app-html:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      # -------------------------------------------------
 
-      # AQUÍ EMPIEZA LA FASE 4 (Simulación de Servidor)
       - name: Simular descarga desde el servidor (Pull)
         run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mi-app-html:${{ github.sha }}
 
-      - name: Simular despliegue del contenedor (Run)
-        run: docker run -d -p 8080:80 --name mi-app-produccion ${{ secrets.DOCKERHUB_USERNAME }}/mi-app-html:${{ github.sha }}
+      - name: Crear y ejecutar contenedor con Docker Compose
+        run:  |
+          export DOCKER_IMAGE=${{ secrets.DOCKERHUB_USERNAME }}/mi-app-html:${{ github.sha }}
+          docker compose up -d
 
-      - name: Prueba de Humo (Smoke Test)
+      - name: Verificar que el contenedor esté corriendo
         run: |
-          echo "Esperando a que el contenedor arranque..."
+          echo "Esperando a que el contenedor esté listo..."
           sleep 3
           curl -f http://localhost:8080 || exit 1
           echo "¡El servidor responde correctamente!"
+
+      - name: Limpieza de imágenes y contenedores viejos (Pruning)
+        run: |
+          echo "Simulando limpieza de servidor..."
+          # En un servidor real, esto libera disco.
+          docker image prune -af
+          docker container prune -f
+
+       
+    
