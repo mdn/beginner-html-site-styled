@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build-and-push:
+  build-push-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Clonar el repositorio
@@ -22,3 +22,17 @@ jobs:
 
       - name: Publicar imagen en Docker Hub
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/mi-app-html:${{ github.sha }}
+
+      # AQUÍ EMPIEZA LA FASE 4 (Simulación de Servidor)
+      - name: Simular descarga desde el servidor (Pull)
+        run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mi-app-html:${{ github.sha }}
+
+      - name: Simular despliegue del contenedor (Run)
+        run: docker run -d -p 8080:80 --name mi-app-produccion ${{ secrets.DOCKERHUB_USERNAME }}/mi-app-html:${{ github.sha }}
+
+      - name: Prueba de Humo (Smoke Test)
+        run: |
+          echo "Esperando a que el contenedor arranque..."
+          sleep 3
+          curl -f http://localhost:8080 || exit 1
+          echo "¡El servidor responde correctamente!"
