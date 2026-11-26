@@ -11,7 +11,8 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@v4
 
-      - name: Check files
-        run: |
-          ls -la
-          echo "The code is here"
+      - name: Build Docker Image
+        run: docker build -t mi-app-html:${{ github.sha }} .
+
+
+        
