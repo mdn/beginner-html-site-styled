@@ -3,6 +3,8 @@ name: CI/CD Multi-Entorno
 on:
   push:
     branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main", "dev" ]
 
 jobs:
   build-push-deploy:
