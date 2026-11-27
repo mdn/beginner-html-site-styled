@@ -1,8 +1,8 @@
-name: CI con Docker
+name: CI/CD Multi-Entorno
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "dev" ]
 
 jobs:
   build-push-deploy:
@@ -17,42 +17,51 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # --- NUEVO: Configuración de Buildx para Caché ---
       - name: Configurar Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # --- NUEVO: Build y Push en un solo paso (con caché) ---
+      - name: Definir variables de entorno
+        id: vars
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+            echo "DEPLOY_ENV=production" >> $GITHUB_ENV
+            echo "IMAGE_TAG=prod" >> $GITHUB_ENV
+            echo "PORT=8080" >> $GITHUB_ENV
+          else
+            echo "DEPLOY_ENV=staging" >> $GITHUB_ENV
+            echo "IMAGE_TAG=dev" >> $GITHUB_ENV
+            echo "PORT=8081" >> $GITHUB_ENV
+          fi
+
       - name: Construir y Publicar imagen Docker
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/mi-app-html:${{ github.sha }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/mi-app-html:${{ env.IMAGE_TAG }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      # -------------------------------------------------
 
-      - name: Simular descarga desde el servidor (Pull)
-        run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mi-app-html:${{ github.sha }}
+      # --- AQUÍ ESTÁ EL PASO QUE FALTABA ---
+      - name: Descargar imagen (Pull)
+        run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mi-app-html:${{ env.IMAGE_TAG }}
+      # -------------------------------------
 
-      - name: Crear y ejecutar contenedor con Docker Compose
-        run:  |
-          export DOCKER_IMAGE=${{ secrets.DOCKERHUB_USERNAME }}/mi-app-html:${{ github.sha }}
+      - name: Simular despliegue (Docker Compose)
+        run: |
+          export DOCKER_IMAGE=${{ secrets.DOCKERHUB_USERNAME }}/mi-app-html:${{ env.IMAGE_TAG }}
+          export APP_PORT=${{ env.PORT }}
+          export APP_ENV=${{ env.DEPLOY_ENV }}
           docker compose up -d
 
-      - name: Verificar que el contenedor esté corriendo
+      - name: Prueba de Humo (Smoke Test)
         run: |
-          echo "Esperando a que el contenedor esté listo..."
+          echo "Esperando a que el contenedor arranque en el puerto ${{ env.PORT }}..."
           sleep 3
-          curl -f http://localhost:8080 || exit 1
-          echo "¡El servidor responde correctamente!"
+          curl -f http://localhost:${{ env.PORT }} || exit 1
+          echo "¡El servidor de ${{ env.DEPLOY_ENV }} responde correctamente!"
 
       - name: Limpieza de imágenes y contenedores viejos (Pruning)
         run: |
-          echo "Simulando limpieza de servidor..."
-          # En un servidor real, esto libera disco.
           docker image prune -af
           docker container prune -f
-
-       
-    
