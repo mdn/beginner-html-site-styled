@@ -1,8 +1,8 @@
 services:
   web:
     image: ${DOCKER_IMAGE}
-    container_name: app-html:production
+    container_name: app-html-${APP_ENV}
     ports:
-    - "${APP_PORT}:80
+    - "${APP_PORT}:80"
     restart: unless-stopped
     
